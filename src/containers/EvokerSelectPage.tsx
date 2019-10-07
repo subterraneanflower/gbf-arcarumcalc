@@ -2,9 +2,9 @@ import * as React from 'react';
 import { useCallback, useContext } from 'react';
 import { withRouter } from 'react-router';
 import { Page } from '../components/Page';
-import { SelectButton } from '../components/SelectButton';
-import { evokers } from '../data/arcarum';
+import { evokers, elementToCssColor } from '../data/arcarum';
 import { ArcarumContext } from '../context/arcarum_context';
+import { Button } from '../components/Button';
 
 const pageTitleStyle: React.CSSProperties = {
   fontWeight: 'normal',
@@ -19,8 +19,10 @@ const evokerButtonContainerStyle: React.CSSProperties = {
 };
 
 const evokerButtonStyle: React.CSSProperties = {
+  display: 'block',
   margin: '1em 0',
-  width: '45%'
+  width: '49%',
+  cursor: 'pointer'
 };
 
 export const EvokerSelectPage = withRouter(props => {
@@ -34,10 +36,12 @@ export const EvokerSelectPage = withRouter(props => {
       props.history.push('/summon');
     };
 
+    const buttonStyle = { ...evokerButtonStyle, backgroundColor: elementToCssColor[ev.arcarumSummon.element] };
+
     return (
-      <SelectButton key={ev.slug} style={evokerButtonStyle} data-character={ev.slug} onClick={onClickCharacter}>
+      <Button key={ev.slug} style={buttonStyle} data-character={ev.slug} onClick={onClickCharacter}>
         {ev.name.ja}
-      </SelectButton>
+      </Button>
     );
   });
 

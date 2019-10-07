@@ -2,8 +2,8 @@ import * as React from 'react';
 import { useCallback, useContext } from 'react';
 import { withRouter } from 'react-router';
 import { Page } from '../components/Page';
-import { SelectButton } from '../components/SelectButton';
 import { ArcarumContext } from '../context/arcarum_context';
+import { Button } from '../components/Button';
 
 const pageTitleStyle: React.CSSProperties = {
   fontWeight: 'normal',
@@ -13,12 +13,15 @@ const pageTitleStyle: React.CSSProperties = {
 
 const summonButtonContainerStyle: React.CSSProperties = {
   display: 'flex',
-  flexWrap: 'wrap'
+  flexWrap: 'wrap',
+  justifyContent: 'space-between'
 };
 
 const summonButtonStyle: React.CSSProperties = {
-  margin: '1em auto',
-  width: '45%'
+  display: 'block',
+  margin: '1em 0',
+  width: '49%',
+  cursor: 'pointer'
 };
 
 const srSummonButtonStyle: React.CSSProperties = {
@@ -58,9 +61,9 @@ export const SummonSelectPage = withRouter(props => {
     };
 
     return (
-      <SelectButton key={`level-${summon.level}`} style={summon.buttonStyle} onClick={onClickSummon}>
+      <Button key={`level-${summon.level}`} style={summon.buttonStyle} onClick={onClickSummon}>
         {summon.label}
-      </SelectButton>
+      </Button>
     );
   });
 

@@ -184,6 +184,15 @@ export const evokers: EvokerData[] = [
   evoker.nier
 ];
 
+export const elementToCssColor = {
+  [GbfElement.FIRE]: 'var(--fire-red)',
+  [GbfElement.WATER]: 'var(--water-blue)',
+  [GbfElement.EARTH]: 'var(--earth-brown)',
+  [GbfElement.WIND]: 'var(--wind-green)',
+  [GbfElement.LIGHT]: 'var(--light-yellow)',
+  [GbfElement.DARK]: 'var(--dark-purple)'
+};
+
 export const levelToRequiredMaterials: ArcarumMaterial[] = [
   { sephiraStone: 0, astra: 0, idean: 0, fragment: 0 }, // なし
   { sephiraStone: 2, astra: 3, idean: 2, fragment: 0 }, // SR
