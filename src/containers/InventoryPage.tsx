@@ -97,7 +97,7 @@ export const InventoryPage = withRouter(props => {
           <Input
             style={numInputStyle}
             type="number"
-            pattern="\d+"
+            pattern="\d*"
             min={0}
             defaultValue={arcarumContext.inventory.sephiraStone}
             ref={sephiraInputRef}
@@ -109,7 +109,7 @@ export const InventoryPage = withRouter(props => {
           <Input
             style={numInputStyle}
             type="number"
-            pattern="\d+"
+            pattern="\d*"
             min={0}
             defaultValue={arcarumContext.inventory.astra}
             ref={astraInputRef}
@@ -121,7 +121,7 @@ export const InventoryPage = withRouter(props => {
           <Input
             style={numInputStyle}
             type="number"
-            pattern="\d+"
+            pattern="\d*"
             min={0}
             defaultValue={arcarumContext.inventory.idean}
             ref={ideanInputRef}
@@ -133,7 +133,7 @@ export const InventoryPage = withRouter(props => {
           <Input
             style={numInputStyle}
             type="number"
-            pattern="\d+"
+            pattern="\d*"
             min={0}
             defaultValue={arcarumContext.inventory.fragment}
             ref={fragmentInputRef}
@@ -145,7 +145,7 @@ export const InventoryPage = withRouter(props => {
           <Input
             style={numInputStyle}
             type="number"
-            pattern="\d+"
+            pattern="\d*"
             min={0}
             defaultValue={arcarumContext.inventory.arcarumPoint}
             ref={pointInputRef}
