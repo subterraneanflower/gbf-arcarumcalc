@@ -19,6 +19,7 @@ const summonButtonContainerStyle: React.CSSProperties = {
 
 const summonButtonStyle: React.CSSProperties = {
   display: 'block',
+  fontSize: '0.8em',
   margin: '1em 0',
   width: '49%',
   cursor: 'pointer'

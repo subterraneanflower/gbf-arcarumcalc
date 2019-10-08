@@ -20,6 +20,9 @@ const evokerButtonContainerStyle: React.CSSProperties = {
 
 const evokerButtonStyle: React.CSSProperties = {
   display: 'block',
+  fontSize: '0.8em',
+  paddingLeft: '0',
+  paddingRight: '0',
   margin: '1em 0',
   width: '49%',
   cursor: 'pointer'
