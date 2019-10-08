@@ -11,7 +11,8 @@ const buttonStyle: React.CSSProperties = {
   color: 'white',
   fontSize: '1em',
   padding: '0.8em 2em',
-  textAlign: 'center'
+  textAlign: 'center',
+  cursor: 'pointer'
 };
 
 export const Button: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement>> = ({ style, ...props }) => {

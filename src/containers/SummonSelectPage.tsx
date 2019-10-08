@@ -21,8 +21,7 @@ const summonButtonStyle: React.CSSProperties = {
   display: 'block',
   fontSize: '0.8em',
   margin: '1em 0',
-  width: '49%',
-  cursor: 'pointer'
+  width: '49%'
 };
 
 const srSummonButtonStyle: React.CSSProperties = {

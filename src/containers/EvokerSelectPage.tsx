@@ -24,8 +24,7 @@ const evokerButtonStyle: React.CSSProperties = {
   paddingLeft: '0',
   paddingRight: '0',
   margin: '1em 0',
-  width: '49%',
-  cursor: 'pointer'
+  width: '49%'
 };
 
 export const EvokerSelectPage = withRouter(props => {
