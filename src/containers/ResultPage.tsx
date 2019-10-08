@@ -44,6 +44,15 @@ const backToTopButtonStyle: React.CSSProperties = {
   width: '12em'
 };
 
+const viewSourceOnGitHubContainerStyle: React.CSSProperties = {
+  margin: '2em 0',
+  textAlign: 'center'
+};
+
+const viewSouceOnGitHubStyle: React.CSSProperties = {
+  color: 'white'
+};
+
 export const ResultPage = withRouter(props => {
   const arcarumContext = useContext(ArcarumContext);
 
@@ -81,7 +90,7 @@ export const ResultPage = withRouter(props => {
 
   const tweet = useCallback(() => {
     const text = encodeURIComponent(
-      `あなたが「${progress.targetEvoker.name.ja}」を取得するまでにかかる日数は……\n約${estimate.days}日\nです！ #十賢者皮算用ツール\nhttps://sbfl.net/app/granbluefantasy/arcarumcalc/`
+      `あなたが「${progress.targetEvoker.name.ja}」を取得するまでにかかる日数は……\n約${estimate.days}日\nです！ #グラブル十賢者皮算用ツール\nhttps://sbfl.net/app/granbluefantasy/arcarumcalc/`
     );
     window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
   }, [estimate]);
@@ -105,6 +114,11 @@ export const ResultPage = withRouter(props => {
         <Button style={backToTopButtonStyle} onClick={backToTop}>
           はじめから
         </Button>
+      </div>
+      <div style={viewSourceOnGitHubContainerStyle}>
+        <a style={viewSouceOnGitHubStyle} href="https://github.com/subterraneanflower/gbf-arcarumcalc" target="_blank">
+          View Source on GitHub
+        </a>
       </div>
     </Page>
   );
