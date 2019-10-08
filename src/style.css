@@ -27,8 +27,31 @@ body,
   font-family: sans-serif;
 }
 
+#app {
+  position: relative;
+  background-color: var(--bg-color);
+}
+
 button:focus,
 input:focus,
 textarea:focus {
   outline: none;
+}
+
+.page-fade-enter {
+  opacity: 0;
+}
+
+.page-fade-enter-active {
+  transition: opacity 200ms ease-out;
+  opacity: 1;
+}
+
+.page-fade-exit {
+  transition: opacity 200ms ease-in;
+  opacity: 1;
+}
+
+.page-fade-exit-active {
+  opacity: 0;
 }

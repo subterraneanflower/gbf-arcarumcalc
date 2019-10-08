@@ -72,7 +72,10 @@ export const SummonSelectPage = withRouter(props => {
 
   return (
     <Page enableBackButton>
-      <h2 style={pageTitleStyle}>「{summonName}」取得状況</h2>
+      <h2 style={pageTitleStyle}>
+        <div>「{summonName}」</div>
+        <div>取得状況</div>
+      </h2>
       <div style={summonButtonContainerStyle}>{summonButtons}</div>
     </Page>
   );

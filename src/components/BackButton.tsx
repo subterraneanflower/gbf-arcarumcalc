@@ -15,7 +15,7 @@ export const BackButton = withRouter(props => {
 
   return (
     <Button style={backButtonStyle} onClick={onClick}>
-      戻る
+      &lt;戻る
     </Button>
   );
 });

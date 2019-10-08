@@ -7,7 +7,9 @@ export interface PageProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const pageStyle: React.CSSProperties = {
-  backgroundColor: 'var(--bg-color)',
+  position: 'absolute',
+  left: '0',
+  top: '0',
   color: 'white',
   width: '100%',
   height: '100%',
@@ -16,7 +18,7 @@ const pageStyle: React.CSSProperties = {
 };
 
 const backButtonContainerStyle: React.CSSProperties = {
-  marginBottom: '0.5em'
+  marginBottom: '1em'
 };
 
 export const Page: React.FC<PageProps> = ({ style, children, enableBackButton, ...props }) => {

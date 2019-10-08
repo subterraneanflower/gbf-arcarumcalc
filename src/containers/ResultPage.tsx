@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useCallback, useContext } from 'react';
+import { useCallback, useContext, useState, useMemo, useEffect } from 'react';
 import { Button } from '../components/Button';
 import { withRouter } from 'react-router';
 import { Page } from '../components/Page';
@@ -12,6 +12,10 @@ const pageTitleStyle: React.CSSProperties = {
   fontWeight: 'normal',
   marginBottom: '1em',
   textAlign: 'center'
+};
+
+const resultStyle: React.CSSProperties = {
+  marginBottom: '3em'
 };
 
 const pStyle: React.CSSProperties = {
@@ -43,6 +47,8 @@ const backToTopButtonStyle: React.CSSProperties = {
 export const ResultPage = withRouter(props => {
   const arcarumContext = useContext(ArcarumContext);
 
+  const [count, setCount] = useState<number>(0);
+
   const backToTop = useCallback(() => {
     if (confirm('最初のページに戻りますか？')) {
       arcarumContext.setInventory({ sephiraStone: 0, astra: 0, idean: 0, fragment: 0, arcarumPoint: 0 });
@@ -50,24 +56,39 @@ export const ResultPage = withRouter(props => {
     }
   }, [props.history]);
 
-  const progress: GbfArcarumProgress = {
-    targetEvoker: arcarumContext.targetEvoker || evoker.fraux,
-    summonLevel: arcarumContext.summonLevel,
-    inventory: arcarumContext.inventory,
-    additionalTicketInfo: arcarumContext.additionalTicketInfo,
-    renewalEventInterval: arcarumContext.renewalEventInterval
-  };
+  const progress: GbfArcarumProgress = useMemo(
+    () => ({
+      targetEvoker: arcarumContext.targetEvoker || evoker.fraux,
+      summonLevel: arcarumContext.summonLevel,
+      inventory: arcarumContext.inventory,
+      additionalTicketInfo: arcarumContext.additionalTicketInfo,
+      renewalEventInterval: arcarumContext.renewalEventInterval
+    }),
+    [
+      arcarumContext.targetEvoker,
+      arcarumContext.summonLevel,
+      arcarumContext.inventory,
+      arcarumContext.additionalTicketInfo,
+      arcarumContext.renewalEventInterval
+    ]
+  );
 
-  const estimate = estimateArcarum(progress);
+  const estimate = useMemo(() => estimateArcarum(progress), [progress]);
+
+  useEffect(() => {
+    setTimeout(() => setCount(Math.min(count + 1, estimate.days)), 8);
+  }, [count, setCount]);
 
   return (
     <Page>
       <h2 style={pageTitleStyle}>結果</h2>
-      <p style={pStyle}>
-        あなたが{arcarumContext.targetEvoker ? arcarumContext.targetEvoker.name.ja : ''}を入手するまで
-      </p>
-      <p style={daysStyle}>約{estimate.days}日</p>
-      <p style={pStyle}>です</p>
+      <div style={resultStyle}>
+        <p style={pStyle}>
+          あなたが{arcarumContext.targetEvoker ? arcarumContext.targetEvoker.name.ja : ''}を入手するまで
+        </p>
+        <p style={daysStyle}>約{count}日</p>
+        <p style={pStyle}>です</p>
+      </div>
       <div style={buttonContainerStyle}>
         <Button style={tweetButtonStyle}>ツイートする</Button>
       </div>
