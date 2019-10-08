@@ -19,11 +19,11 @@ const backButtonContainerStyle: React.CSSProperties = {
   marginBottom: '0.5em'
 };
 
-export const Page: React.FC<PageProps> = ({ style, children, ...props }) => {
+export const Page: React.FC<PageProps> = ({ style, children, enableBackButton, ...props }) => {
   const combinedStyle = useMemo(() => ({ ...pageStyle, ...(style || {}) }), [style]);
   return (
     <div style={combinedStyle} {...props}>
-      {props.enableBackButton ? (
+      {enableBackButton ? (
         <div style={backButtonContainerStyle}>
           <BackButton />
         </div>
