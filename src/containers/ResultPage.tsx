@@ -79,6 +79,13 @@ export const ResultPage = withRouter(props => {
     setTimeout(() => setCount(Math.min(count + 1, estimate.days)), 8);
   }, [count, setCount]);
 
+  const tweet = useCallback(() => {
+    const text = encodeURIComponent(
+      `あなたが「${progress.targetEvoker.name.ja}」を取得するまでにかかる日数は……\n約${estimate.days}日\nです！\nhttps://sbfl.net/app/granbluefantasy/arcarumcalc/`
+    );
+    window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
+  }, [estimate]);
+
   return (
     <Page>
       <h2 style={pageTitleStyle}>結果</h2>
@@ -90,7 +97,9 @@ export const ResultPage = withRouter(props => {
         <p style={pStyle}>です</p>
       </div>
       <div style={buttonContainerStyle}>
-        <Button style={tweetButtonStyle}>ツイートする</Button>
+        <Button style={tweetButtonStyle} onClick={tweet}>
+          ツイートする
+        </Button>
       </div>
       <div style={buttonContainerStyle}>
         <Button style={backToTopButtonStyle} onClick={backToTop}>

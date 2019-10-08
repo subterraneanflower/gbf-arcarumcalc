@@ -140,7 +140,7 @@ export const EventPage = withRouter(props => {
 
       <div style={buttonContainerStyle}>
         <Button style={buttonStyle} onClick={onClickNext}>
-          次へ
+          計算する！
         </Button>
       </div>
     </Page>
