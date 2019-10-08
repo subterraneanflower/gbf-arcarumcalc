@@ -217,7 +217,7 @@ const normalCheckpoint: CheckpointInfo = {
     { expectedSephiraStoneValue: 1 / 3, expectedAstraValue: 0.2, expectedFragmentValue: 0.15 },
     { expectedSephiraStoneValue: 1 / 3, expectedAstraValue: 0.2, expectedFragmentValue: 0.15 }
   ],
-  dropArcarumPoint: { estimatedMin: 500, estimatedMax: 1000 }
+  dropArcarumPoint: { estimatedMin: 400, estimatedMax: 800 }
 };
 
 const puppetCheckpoint: CheckpointInfo = {
@@ -231,14 +231,14 @@ const puppetCheckpoint: CheckpointInfo = {
       bossDropMaterial: {
         sephiraStone: zeroDrop,
         astra: {
-          fourElements: { estimatedMin: 1 * 0.5, estimatedMax: 4 * 0.5 },
-          lightAndDark: { estimatedMin: 1 * 0.5, estimatedMax: 3 * 0.5 }
+          fourElements: { estimatedMin: 1 * 0.5, estimatedMax: 3 * 0.5 },
+          lightAndDark: { estimatedMin: 0, estimatedMax: 0.5 * 3 * 0.5 }
         },
-        idean: { estimatedMin: 1 * (1 / 3) * 0.5, estimatedMax: 2 * (1 / 3) * 0.5 }
+        idean: { estimatedMin: 1 * (1 / 3), estimatedMax: 2 * (1 / 3) }
       }
     }
   ],
-  dropArcarumPoint: { estimatedMin: 600, estimatedMax: 1100 }
+  dropArcarumPoint: { estimatedMin: 500, estimatedMax: 900 }
 };
 
 const bossCheckpoint: CheckpointInfo = {
@@ -259,7 +259,7 @@ const bossCheckpoint: CheckpointInfo = {
       }
     }
   ],
-  dropArcarumPoint: { estimatedMin: 700, estimatedMax: 1200 }
+  dropArcarumPoint: { estimatedMin: 600, estimatedMax: 1100 }
 };
 
 export const checkpointNumberToInfo: CheckpointInfo[] = [

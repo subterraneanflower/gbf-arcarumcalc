@@ -51,7 +51,9 @@ const buttonStyle: React.CSSProperties = {
 export const EventPage = withRouter(props => {
   const arcarumContext = useContext(ArcarumContext);
 
-  const [showsTicketInput, setShowsTicketInput] = useState<boolean>(true);
+  const [showsTicketInput, setShowsTicketInput] = useState<boolean>(
+    arcarumContext.additionalTicketInfo ? arcarumContext.additionalTicketInfo.startAt !== 'none' : false
+  );
 
   const additionalTicketStartRef = useRef<HTMLSelectElement>(null);
   const additionalTicketInputRef = useRef<HTMLInputElement>(null);
@@ -105,9 +107,9 @@ export const EventPage = withRouter(props => {
               onChange={onChangeAdditionalTicketStartAt}
               ref={additionalTicketStartRef}
             >
+              <option value="none">なし</option>
               <option value="unknown">そのうち</option>
               <option value="today">今日から</option>
-              <option value="none">なし</option>
             </Select>
 
             {showsTicketInput ? (

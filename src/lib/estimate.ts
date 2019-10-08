@@ -36,7 +36,7 @@ const satisfiesRequiredMaterial = (required: ArcarumMaterial, inventory: GbfInve
 
   const satisfiesWithPoints = satisfiesIdean && totalPoints <= inventory.arcarumPoint;
 
-  return satisfiesWithPoints;
+  return satisfiesWithoutPoints || satisfiesWithPoints;
 };
 
 const calcExpectedValueByDropMaterial = (drop: DropMaterial): number => {
@@ -110,13 +110,15 @@ export const estimateArcarum: (progress: GbfArcarumProgress) => EstimatedResult 
     currentInventory = combineGbfInventory(currentInventory, exploreResultInventory);
 
     // 復刻イベントが来たら3万ポイント追加
+    // ただし毎日に分配して配布する
+    // 一気に3万ポイント加算するとわずかな差が潰れるため
     if (progress.renewalEventInterval !== 'none') {
-      if (progress.renewalEventInterval === 'monthly' && exploreCount && exploreCount % 30 === 0) {
-        // 30日ごと
-        currentInventory.arcarumPoint += 30000;
-      } else if (progress.renewalEventInterval === 'bimonthly' && exploreCount && exploreCount % 60 === 0) {
-        // 60日ごと
-        currentInventory.arcarumPoint += 30000;
+      if (progress.renewalEventInterval === 'monthly') {
+        // 30日
+        currentInventory.arcarumPoint += 30000 / 30;
+      } else if (progress.renewalEventInterval === 'bimonthly') {
+        // 60日
+        currentInventory.arcarumPoint += 30000 / 60;
       }
     }
   }

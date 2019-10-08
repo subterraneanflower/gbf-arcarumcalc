@@ -23,8 +23,8 @@ export const App = () => {
     arcarumPoint: 0
   });
   const [additionalTicketInfo, setAdditionalTicketInfo] = useState<AdditionalTicketInfo>({
-    startAt: 'unknown',
-    days: 10
+    startAt: 'none',
+    days: 0
   });
   const [renewalEventInterval, setRenewalEventInterval] = useState<RenewalEventInterval>('monthly');
 
