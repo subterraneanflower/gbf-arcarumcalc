@@ -81,7 +81,7 @@ export const ResultPage = withRouter(props => {
 
   const tweet = useCallback(() => {
     const text = encodeURIComponent(
-      `あなたが「${progress.targetEvoker.name.ja}」を取得するまでにかかる日数は……\n約${estimate.days}日\nです！\nhttps://sbfl.net/app/granbluefantasy/arcarumcalc/`
+      `あなたが「${progress.targetEvoker.name.ja}」を取得するまでにかかる日数は……\n約${estimate.days}日\nです！ #十賢者皮算用ツール\nhttps://sbfl.net/app/granbluefantasy/arcarumcalc/`
     );
     window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
   }, [estimate]);
