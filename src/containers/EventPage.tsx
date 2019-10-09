@@ -114,14 +114,7 @@ export const EventPage = withRouter(props => {
 
             {showsTicketInput ? (
               <>
-                <Input
-                  style={numInputStyle}
-                  type="number"
-                  pattern="\d+"
-                  min={0}
-                  defaultValue={arcarumContext.additionalTicketInfo ? arcarumContext.additionalTicketInfo.days : 0}
-                  ref={additionalTicketInputRef}
-                />
+                <Input style={numInputStyle} type="number" pattern="\d+" min={0} ref={additionalTicketInputRef} />
                 日間
               </>
             ) : null}
