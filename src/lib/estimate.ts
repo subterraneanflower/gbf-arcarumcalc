@@ -97,6 +97,7 @@ export const estimateArcarum: (progress: GbfArcarumProgress) => EstimatedResult 
 
   const loopLimit = 999;
   let exploreCount = 0;
+  let usedAdditionalTickets = 0;
   for (exploreCount = 0; exploreCount <= loopLimit; exploreCount++) {
     // アイテムが集まっていればbreak
     if (satisfiesRequiredMaterial(totalRequiredMaterial, currentInventory)) {
@@ -108,6 +109,24 @@ export const estimateArcarum: (progress: GbfArcarumProgress) => EstimatedResult 
     const exploreResultInventory = exploreCheckpoint(currentCheckpoint, progress.targetEvoker.arcarumSummon.element);
 
     currentInventory = combineGbfInventory(currentInventory, exploreResultInventory);
+
+    // 追加チケットがある場合
+    if (
+      progress.additionalTicketInfo &&
+      progress.additionalTicketInfo.startAt === 'today' &&
+      usedAdditionalTickets < progress.additionalTicketInfo.days
+    ) {
+      exploreCount++; // 探索回数を増やす
+      usedAdditionalTickets++; // 追加チケット使用回数を増やす
+
+      // 次のチェックポイントを探索
+      const additionalCheckpoint = (exploreCount % 9) + 1; // 1から9の範囲
+      const additionalExploreResultInventory = exploreCheckpoint(
+        additionalCheckpoint,
+        progress.targetEvoker.arcarumSummon.element
+      );
+      currentInventory = combineGbfInventory(currentInventory, additionalExploreResultInventory);
+    }
 
     // 復刻イベントが来たら3万ポイント追加
     // ただし毎日に分配して配布する
@@ -123,21 +142,16 @@ export const estimateArcarum: (progress: GbfArcarumProgress) => EstimatedResult 
     }
   }
 
-  // 仮の推定日数
-  let days = exploreCount;
+  // 推定日数
+  let days = exploreCount - usedAdditionalTickets;
 
   // 追加チケットがある場合
-  if (progress.additionalTicketInfo) {
-    // 今日からチケット追加開始の場合
-    // すぐさま引き算する
-    //
+  if (progress.additionalTicketInfo && progress.additionalTicketInfo.startAt === 'unknown') {
     // チケット追加開始日がわからない場合
     // ある程度期間が長ければ引き算する
     // ここではチケット追加日数の2倍以上の時間がかかっている場合、引き算している
     // この条件は適切かわからず、少し見直すべきかもしれない
-    if (progress.additionalTicketInfo.startAt === 'today') {
-      days -= progress.additionalTicketInfo.days;
-    } else if (days > progress.additionalTicketInfo.days * 2) {
+    if (days > progress.additionalTicketInfo.days * 2) {
       days -= progress.additionalTicketInfo.days;
     }
   }
