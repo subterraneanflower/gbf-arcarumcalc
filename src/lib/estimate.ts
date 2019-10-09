@@ -99,6 +99,11 @@ export const estimateArcarum: (progress: GbfArcarumProgress) => EstimatedResult 
   let exploreCount = 0;
   let dayCount = 0;
   let usedAdditionalTickets = 0;
+
+  // 入手アイテムにかける倍率。
+  // 最初の頃は少なめに、徐々に多く手に入るようにする。
+  let inventoryMultiplier = 0.1;
+
   for (exploreCount = 0; exploreCount <= loopLimit; exploreCount++, dayCount++) {
     // アイテムが集まっていればbreak
     if (satisfiesRequiredMaterial(totalRequiredMaterial, currentInventory)) {
@@ -109,7 +114,7 @@ export const estimateArcarum: (progress: GbfArcarumProgress) => EstimatedResult 
     const currentCheckpoint = (exploreCount % 9) + 1; // 1から9の範囲
     const exploreResultInventory = exploreCheckpoint(currentCheckpoint, progress.targetEvoker.arcarumSummon.element);
 
-    currentInventory = combineGbfInventory(currentInventory, exploreResultInventory);
+    currentInventory = combineGbfInventory(currentInventory, exploreResultInventory, inventoryMultiplier);
 
     // 追加チケットがある場合
     if (
@@ -126,7 +131,7 @@ export const estimateArcarum: (progress: GbfArcarumProgress) => EstimatedResult 
         additionalCheckpoint,
         progress.targetEvoker.arcarumSummon.element
       );
-      currentInventory = combineGbfInventory(currentInventory, additionalExploreResultInventory);
+      currentInventory = combineGbfInventory(currentInventory, additionalExploreResultInventory, inventoryMultiplier);
     }
 
     // 復刻イベントが来たら3万ポイント追加
@@ -142,6 +147,9 @@ export const estimateArcarum: (progress: GbfArcarumProgress) => EstimatedResult 
         currentInventory.arcarumPoint += 30000 / 60;
       }
     }
+
+    // 入手倍率増加
+    inventoryMultiplier = Math.min(inventoryMultiplier + 0.005 * dayCount, 1.2);
   }
 
   // 推定日数

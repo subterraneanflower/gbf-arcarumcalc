@@ -17,12 +17,16 @@ export interface GbfArcarumProgress {
   renewalEventInterval: RenewalEventInterval;
 }
 
-export const combineGbfInventory = (inventory1: GbfInventory, inventory2: GbfInventory): GbfInventory => {
+export const combineGbfInventory = (
+  inventory1: GbfInventory,
+  inventory2: GbfInventory,
+  multiplier: number = 1
+): GbfInventory => {
   return {
-    sephiraStone: inventory1.sephiraStone + inventory2.sephiraStone,
-    astra: inventory1.astra + inventory2.astra,
-    idean: inventory1.idean + inventory2.idean,
-    fragment: inventory1.fragment + inventory2.fragment,
-    arcarumPoint: inventory1.arcarumPoint + inventory2.arcarumPoint
+    sephiraStone: inventory1.sephiraStone + inventory2.sephiraStone * multiplier,
+    astra: inventory1.astra + inventory2.astra * multiplier,
+    idean: inventory1.idean + inventory2.idean * multiplier,
+    fragment: inventory1.fragment + inventory2.fragment * multiplier,
+    arcarumPoint: inventory1.arcarumPoint + inventory2.arcarumPoint * multiplier
   };
 };

@@ -222,8 +222,8 @@ const normalCheckpoint: CheckpointInfo = {
 
 const puppetCheckpoint: CheckpointInfo = {
   stages: [
-    { expectedSephiraStoneValue: 1 / 2, expectedAstraValue: 0.5, expectedFragmentValue: 0.3 },
-    { expectedSephiraStoneValue: 1 / 2, expectedAstraValue: 0.5, expectedFragmentValue: 0.3 },
+    { expectedSephiraStoneValue: 1 / 2, expectedAstraValue: 0.4, expectedFragmentValue: 0.3 },
+    { expectedSephiraStoneValue: 1 / 2, expectedAstraValue: 0.4, expectedFragmentValue: 0.3 },
     {
       expectedFragmentValue: 0,
       expectedSephiraStoneValue: 0,
@@ -243,8 +243,8 @@ const puppetCheckpoint: CheckpointInfo = {
 
 const bossCheckpoint: CheckpointInfo = {
   stages: [
-    { expectedSephiraStoneValue: 1 / 2, expectedAstraValue: 0.5, expectedFragmentValue: 0.3 },
-    { expectedSephiraStoneValue: 1 / 2, expectedAstraValue: 0.5, expectedFragmentValue: 0.3 },
+    { expectedSephiraStoneValue: 1 / 2, expectedAstraValue: 0.4, expectedFragmentValue: 0.3 },
+    { expectedSephiraStoneValue: 1 / 2, expectedAstraValue: 0.4, expectedFragmentValue: 0.3 },
     {
       expectedFragmentValue: 0,
       expectedSephiraStoneValue: 0,
