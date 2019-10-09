@@ -97,8 +97,9 @@ export const estimateArcarum: (progress: GbfArcarumProgress) => EstimatedResult 
 
   const loopLimit = 999;
   let exploreCount = 0;
+  let dayCount = 0;
   let usedAdditionalTickets = 0;
-  for (exploreCount = 0; exploreCount <= loopLimit; exploreCount++) {
+  for (exploreCount = 0; exploreCount <= loopLimit; exploreCount++, dayCount++) {
     // アイテムが集まっていればbreak
     if (satisfiesRequiredMaterial(totalRequiredMaterial, currentInventory)) {
       break;
@@ -131,7 +132,8 @@ export const estimateArcarum: (progress: GbfArcarumProgress) => EstimatedResult 
     // 復刻イベントが来たら3万ポイント追加
     // ただし毎日に分配して配布する
     // 一気に3万ポイント加算するとわずかな差が潰れるため
-    if (progress.renewalEventInterval !== 'none') {
+    // ただし、残り日数少ない場合の、現実とのズレを防ぐため、半月以上経ってから配布を開始する
+    if (progress.renewalEventInterval !== 'none' && dayCount > 15) {
       if (progress.renewalEventInterval === 'monthly') {
         // 30日
         currentInventory.arcarumPoint += 30000 / 30;
