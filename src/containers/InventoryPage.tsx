@@ -94,27 +94,27 @@ export const InventoryPage = withRouter(props => {
       <div style={inputContainerStyle}>
         <div style={inputItemStyle}>
           <label style={labelStyle}>セフィラ石</label>
-          <Input style={numInputStyle} type="number" pattern="\d*" min={0} ref={sephiraInputRef} />
+          <Input style={numInputStyle} type="number" pattern="\d*" min={0} placeholder="0" ref={sephiraInputRef} />
         </div>
 
         <div style={inputItemStyle}>
           <label style={labelStyle}>アストラ</label>
-          <Input style={numInputStyle} type="number" pattern="\d*" min={0} ref={astraInputRef} />
+          <Input style={numInputStyle} type="number" pattern="\d*" min={0} placeholder="0" ref={astraInputRef} />
         </div>
 
         <div style={inputItemStyle}>
           <label style={labelStyle}>イデア</label>
-          <Input style={numInputStyle} type="number" pattern="\d*" min={0} ref={ideanInputRef} />
+          <Input style={numInputStyle} type="number" pattern="\d*" min={0} placeholder="0" ref={ideanInputRef} />
         </div>
 
         <div style={inputItemStyle}>
           <label style={labelStyle}>フラグメント</label>
-          <Input style={numInputStyle} type="number" pattern="\d*" min={0} ref={fragmentInputRef} />
+          <Input style={numInputStyle} type="number" pattern="\d*" min={0} placeholder="0" ref={fragmentInputRef} />
         </div>
 
         <div style={inputItemStyle}>
           <label style={labelStyle}>ポイント</label>
-          <Input style={numInputStyle} type="number" pattern="\d*" min={0} ref={pointInputRef} />
+          <Input style={numInputStyle} type="number" pattern="\d*" min={0} placeholder="0" ref={pointInputRef} />
         </div>
       </div>
 
