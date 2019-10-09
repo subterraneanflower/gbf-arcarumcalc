@@ -10,7 +10,9 @@ const titlePageStyle: React.CSSProperties = {
   justifyContent: 'space-around'
 };
 
-const logoContainerStyle: React.CSSProperties = {};
+const logoContainerStyle: React.CSSProperties = {
+  marginBottom: '2em'
+};
 
 const logoImgStyle: React.CSSProperties = {
   display: 'block',
@@ -28,6 +30,15 @@ const buttonContainerStyle: React.CSSProperties = {
   textAlign: 'center'
 };
 
+const issueLinkContainerStyle: React.CSSProperties = {
+  margin: '2em 0',
+  textAlign: 'center'
+};
+
+const issueLinkStyle: React.CSSProperties = {
+  color: 'white'
+};
+
 export const TitlePage = withRouter(props => {
   const gotoCalc = useCallback(() => {
     props.history.push('/evoker');
@@ -42,6 +53,12 @@ export const TitlePage = withRouter(props => {
 
       <div style={buttonContainerStyle}>
         <Button onClick={gotoCalc}>はじめる</Button>
+      </div>
+
+      <div style={issueLinkContainerStyle}>
+        <a style={issueLinkStyle} href="https://github.com/subterraneanflower/gbf-arcarumcalc/issues" target="_blank">
+          既知の不具合
+        </a>
       </div>
     </Page>
   );
