@@ -7,6 +7,9 @@ import { GbfArcarumProgress } from '../lib/gbf';
 import { estimateArcarum } from '../lib/estimate';
 import { ArcarumContext } from '../context/arcarum_context';
 import { evoker } from '../data/arcarum';
+import { AppContext } from '../context/app_context';
+
+declare let gtag: any;
 
 const pageTitleStyle: React.CSSProperties = {
   fontWeight: 'normal',
@@ -15,7 +18,7 @@ const pageTitleStyle: React.CSSProperties = {
 };
 
 const resultStyle: React.CSSProperties = {
-  marginBottom: '3em'
+  marginBottom: '2em'
 };
 
 const pStyle: React.CSSProperties = {
@@ -29,8 +32,17 @@ const daysStyle: React.CSSProperties = {
 };
 
 const buttonContainerStyle: React.CSSProperties = {
+  fontSize: '0.8em',
   margin: '1em 0',
   textAlign: 'center'
+};
+
+const installButtonContainerStyle: React.CSSProperties = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  fontSize: '0.8em',
+  margin: '3em 0'
 };
 
 const tweetButtonStyle: React.CSSProperties = {
@@ -44,6 +56,16 @@ const backToTopButtonStyle: React.CSSProperties = {
   width: '12em'
 };
 
+const installButtonStyle: React.CSSProperties = {
+  display: 'inline-block',
+  width: '12em',
+  margin: '0.3em 0'
+};
+
+const installMessageStyle: React.CSSProperties = {
+  textAlign: 'center'
+};
+
 const viewSourceOnGitHubContainerStyle: React.CSSProperties = {
   margin: '2em 0',
   textAlign: 'center'
@@ -54,6 +76,7 @@ const viewSouceOnGitHubStyle: React.CSSProperties = {
 };
 
 export const ResultPage = withRouter(props => {
+  const { installPrompt, setInstallPrompt } = useContext(AppContext);
   const arcarumContext = useContext(ArcarumContext);
 
   const [count, setCount] = useState<number>(0);
@@ -64,6 +87,22 @@ export const ResultPage = withRouter(props => {
       props.history.push('/');
     }
   }, [props.history]);
+
+  const install = useCallback(() => {
+    if (!installPrompt) {
+      return;
+    }
+
+    installPrompt.prompt();
+
+    installPrompt.userChoice.then((choiceResult: any) => {
+      if (choiceResult.outcome === 'accepted') {
+        gtag('event', 'Add to Homescreen', { event_category: 'App', event_label: 'GBF Arcarum Calc' });
+      }
+
+      setInstallPrompt(null);
+    });
+  }, [installPrompt, setInstallPrompt]);
 
   const progress: GbfArcarumProgress = useMemo(
     () => ({
@@ -117,6 +156,18 @@ export const ResultPage = withRouter(props => {
           はじめから
         </Button>
       </div>
+      {installPrompt ? (
+        <div style={installButtonContainerStyle}>
+          <div style={installMessageStyle}>
+            このツールをアプリとして
+            <br />
+            インストールすることができます
+          </div>
+          <Button style={installButtonStyle} onClick={install}>
+            インストール
+          </Button>
+        </div>
+      ) : null}
       <div style={viewSourceOnGitHubContainerStyle}>
         <a style={viewSouceOnGitHubStyle} href="https://github.com/subterraneanflower/gbf-arcarumcalc" target="_blank">
           View Source on GitHub

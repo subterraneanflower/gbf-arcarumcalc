@@ -1,0 +1,21 @@
+{
+  "short_name": "十賢者皮算用",
+  "name": "グラブル十賢者皮算用ツール",
+  "icons": [
+    {
+      "src": "img/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "img/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "https://sbfl.net/app/granbluefantasy/arcarumcalc/",
+  "background_color": "#343435",
+  "display": "standalone",
+  "scope": "https://sbfl.net/app/granbluefantasy/arcarumcalc/",
+  "theme_color": "#343435"
+}
