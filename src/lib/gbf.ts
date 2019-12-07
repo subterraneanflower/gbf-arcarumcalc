@@ -12,6 +12,7 @@ export interface GbfInventory {
 export interface GbfArcarumProgress {
   targetEvoker: EvokerData;
   summonLevel: number;
+  unusedTickets: number;
   inventory: GbfInventory;
   additionalTicketInfo?: AdditionalTicketInfo;
   renewalEventInterval: RenewalEventInterval;

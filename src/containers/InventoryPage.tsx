@@ -19,7 +19,7 @@ const inputContainerStyle: React.CSSProperties = {
 };
 
 const inputItemStyle: React.CSSProperties = {
-  margin: '0.8em 0'
+  margin: '0.4em 0'
 };
 
 const labelStyle: React.CSSProperties = {
@@ -44,6 +44,7 @@ const buttonStyle: React.CSSProperties = {
 export const InventoryPage = withRouter(props => {
   const arcarumContext = useContext(ArcarumContext);
 
+  const unusedTicketsInputRef = useRef<HTMLInputElement>(null);
   const sephiraInputRef = useRef<HTMLInputElement>(null);
   const astraInputRef = useRef<HTMLInputElement>(null);
   const ideanInputRef = useRef<HTMLInputElement>(null);
@@ -51,11 +52,16 @@ export const InventoryPage = withRouter(props => {
   const pointInputRef = useRef<HTMLInputElement>(null);
 
   const onClickNext = useCallback(() => {
+    let unusedTickets = 0;
     let sephiraStone = 0;
     let astra = 0;
     let idean = 0;
     let fragment = 0;
     let point = 0;
+
+    if (unusedTicketsInputRef.current) {
+      unusedTickets = parseInt(unusedTicketsInputRef.current.value) || 0;
+    }
 
     if (sephiraInputRef.current) {
       sephiraStone = parseInt(sephiraInputRef.current.value) || 0;
@@ -77,6 +83,8 @@ export const InventoryPage = withRouter(props => {
       point = parseInt(pointInputRef.current.value) || 0;
     }
 
+    arcarumContext.setUnusedTickets(unusedTickets);
+
     arcarumContext.setInventory({
       sephiraStone,
       astra,
@@ -92,6 +100,18 @@ export const InventoryPage = withRouter(props => {
     <Page enableBackButton>
       <h2 style={pageTitleStyle}>アイテム所持数</h2>
       <div style={inputContainerStyle}>
+        <div style={inputItemStyle}>
+          <label style={labelStyle}>所持チケット</label>
+          <Input
+            style={numInputStyle}
+            type="number"
+            pattern="\d*"
+            min={0}
+            placeholder="0"
+            ref={unusedTicketsInputRef}
+          />
+        </div>
+
         <div style={inputItemStyle}>
           <label style={labelStyle}>セフィラ石</label>
           <Input style={numInputStyle} type="number" pattern="\d*" min={0} placeholder="0" ref={sephiraInputRef} />

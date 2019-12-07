@@ -69,6 +69,7 @@ export const ResultPage = withRouter(props => {
     () => ({
       targetEvoker: arcarumContext.targetEvoker || evoker.fraux,
       summonLevel: arcarumContext.summonLevel,
+      unusedTickets: arcarumContext.unusedTickets,
       inventory: arcarumContext.inventory,
       additionalTicketInfo: arcarumContext.additionalTicketInfo,
       renewalEventInterval: arcarumContext.renewalEventInterval
@@ -76,6 +77,7 @@ export const ResultPage = withRouter(props => {
     [
       arcarumContext.targetEvoker,
       arcarumContext.summonLevel,
+      arcarumContext.unusedTickets,
       arcarumContext.inventory,
       arcarumContext.additionalTicketInfo,
       arcarumContext.renewalEventInterval

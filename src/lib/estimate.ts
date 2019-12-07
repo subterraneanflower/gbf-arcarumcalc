@@ -153,7 +153,7 @@ export const estimateArcarum: (progress: GbfArcarumProgress) => EstimatedResult 
   }
 
   // 推定日数
-  let days = exploreCount - usedAdditionalTickets;
+  let days = exploreCount - usedAdditionalTickets - progress.unusedTickets;
 
   // 追加チケットがある場合
   if (progress.additionalTicketInfo && progress.additionalTicketInfo.startAt === 'unknown') {

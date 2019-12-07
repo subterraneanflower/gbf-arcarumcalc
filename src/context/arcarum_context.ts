@@ -14,12 +14,14 @@ export type RenewalEventInterval = 'none' | 'monthly' | 'bimonthly';
 export interface ArcarumContextData {
   targetEvoker?: EvokerData;
   summonLevel: number;
+  unusedTickets: number;
   inventory: GbfInventory;
   additionalTicketInfo?: AdditionalTicketInfo;
   renewalEventInterval: RenewalEventInterval;
 
   setTargetEvoker: (evoker: EvokerData) => any;
   setSummonLevel: (level: number) => any;
+  setUnusedTickets: (tickets: number) => any;
   setInventory: (iventory: GbfInventory) => any;
   setAdditionalTicketInfo: (info: AdditionalTicketInfo) => any;
   setRenewalEventInterval: (interval: RenewalEventInterval) => any;
@@ -27,6 +29,7 @@ export interface ArcarumContextData {
 
 export const ArcarumContext = React.createContext<ArcarumContextData>({
   summonLevel: 0,
+  unusedTickets: 0,
   inventory: {
     sephiraStone: 0,
     astra: 0,
@@ -38,6 +41,7 @@ export const ArcarumContext = React.createContext<ArcarumContextData>({
 
   setTargetEvoker: (evoker: EvokerData) => null,
   setSummonLevel: (level: number) => null,
+  setUnusedTickets: (tickets: number) => null, 
   setInventory: (inventory: GbfInventory) => null,
   setAdditionalTicketInfo: (info: AdditionalTicketInfo) => null,
   setRenewalEventInterval: (interval: RenewalEventInterval) => null

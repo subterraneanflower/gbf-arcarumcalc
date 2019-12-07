@@ -15,6 +15,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 export const App = () => {
   const [targetEvoker, setTargetEvoker] = useState<EvokerData | undefined>();
   const [summonLevel, setSummonLevel] = useState<number>(0);
+  const [unusedTickets, setUnusedTickets] = useState<number>(0);
   const [inventory, setInventory] = useState<GbfInventory>({
     sephiraStone: 0,
     astra: 0,
@@ -34,11 +35,13 @@ export const App = () => {
         value={{
           targetEvoker,
           summonLevel,
+          unusedTickets,
           inventory,
           additionalTicketInfo,
           renewalEventInterval,
           setTargetEvoker,
           setSummonLevel,
+          setUnusedTickets,
           setInventory,
           setAdditionalTicketInfo,
           setRenewalEventInterval
