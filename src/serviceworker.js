@@ -1,6 +1,6 @@
-const CACHE_KEY = 'GbfArcarumCalc-Cache-v1';
+const CACHE_KEY = 'GbfArcarumCalc-Cache-v2';
 
-self.addEventListener('install', event => {
+self.addEventListener('install', (event) => {
   self.skipWaiting();
 
   const urlsToCache = [
@@ -11,25 +11,26 @@ self.addEventListener('install', event => {
     'img/logo.png',
     'img/logo.svg',
     'img/icon-192.png',
-    'img/icon-512.png'
+    'img/icon-512.png',
+    'img/share_image_logo.png'
   ];
 
   event.waitUntil(
     caches
       .open(CACHE_KEY)
-      .then(cache => cache.addAll(urlsToCache.map(url => new Request(url, { cache: 'no-cache', mode: 'no-cors' }))))
+      .then((cache) => cache.addAll(urlsToCache.map((url) => new Request(url, { cache: 'no-cache', mode: 'no-cors' }))))
   );
 });
 
-self.addEventListener('fetch', event => {
+self.addEventListener('fetch', (event) => {
   event.respondWith(fetch(event.request).catch(() => caches.match(event.request)));
 });
 
-self.addEventListener('activate', event => {
+self.addEventListener('activate', (event) => {
   const cacheWhitelist = [CACHE_KEY];
 
-  const deleteOldCache = caches.keys().then(cacheNames => {
-    const deletePromises = cacheNames.map(cacheName => {
+  const deleteOldCache = caches.keys().then((cacheNames) => {
+    const deletePromises = cacheNames.map((cacheName) => {
       if (!cacheWhitelist.includes(cacheName)) {
         return caches.delete(cacheName);
       }
