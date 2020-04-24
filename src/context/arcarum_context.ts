@@ -41,7 +41,7 @@ export const ArcarumContext = React.createContext<ArcarumContextData>({
 
   setTargetEvoker: (evoker: EvokerData) => null,
   setSummonLevel: (level: number) => null,
-  setUnusedTickets: (tickets: number) => null, 
+  setUnusedTickets: (tickets: number) => null,
   setInventory: (inventory: GbfInventory) => null,
   setAdditionalTicketInfo: (info: AdditionalTicketInfo) => null,
   setRenewalEventInterval: (interval: RenewalEventInterval) => null

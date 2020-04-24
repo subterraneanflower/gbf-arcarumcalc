@@ -8,7 +8,7 @@ const backButtonStyle: React.CSSProperties = {
   padding: '0.3em 1em'
 };
 
-export const BackButton = withRouter(props => {
+export const BackButton = withRouter((props) => {
   const onClick = useCallback(() => {
     props.history.goBack();
   }, [props.history]);

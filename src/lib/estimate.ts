@@ -79,7 +79,7 @@ const exploreCheckpoint = (checkpoint: number, element: GbfElement): GbfInventor
   }
 
   const expoloredResult = checkpointInfo.stages
-    .map<GbfInventory>(stage => calcExpectedInventoryByStageInfo(stage, element))
+    .map<GbfInventory>((stage) => calcExpectedInventoryByStageInfo(stage, element))
     .reduce<GbfInventory>((prev, current) => combineGbfInventory(prev, current), emptyInventory);
 
   expoloredResult.arcarumPoint += calcExpectedValueByDropMaterial(checkpointInfo.dropArcarumPoint);
@@ -87,7 +87,7 @@ const exploreCheckpoint = (checkpoint: number, element: GbfElement): GbfInventor
   return expoloredResult;
 };
 
-export const estimateArcarum: (progress: GbfArcarumProgress) => EstimatedResult = progress => {
+export const estimateArcarum: (progress: GbfArcarumProgress) => EstimatedResult = (progress) => {
   const totalRequiredMaterial = levelToRequiredMaterials
     .slice(progress.summonLevel + 1)
     .map((material): GbfInventory => ({ ...material, arcarumPoint: 0 }))

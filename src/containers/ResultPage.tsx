@@ -8,6 +8,7 @@ import { estimateArcarum } from '../lib/estimate';
 import { ArcarumContext } from '../context/arcarum_context';
 import { evoker } from '../data/arcarum';
 import { AppContext } from '../context/app_context';
+import { generateShareImageFile } from '../lib/image';
 
 declare let gtag: any;
 
@@ -45,7 +46,17 @@ const installButtonContainerStyle: React.CSSProperties = {
   margin: '3em 0'
 };
 
+const disabledButtonStyle: React.CSSProperties = {
+  opacity: 0.3
+};
+
 const tweetButtonStyle: React.CSSProperties = {
+  display: 'inline-block',
+  backgroundColor: 'var(--twitter-blue)',
+  width: '12em'
+};
+
+const shareButtonStyle: React.CSSProperties = {
   display: 'inline-block',
   backgroundColor: 'var(--twitter-blue)',
   width: '12em'
@@ -75,11 +86,12 @@ const viewSouceOnGitHubStyle: React.CSSProperties = {
   color: 'white'
 };
 
-export const ResultPage = withRouter(props => {
+export const ResultPage = withRouter((props) => {
   const { installPrompt, setInstallPrompt } = useContext(AppContext);
   const arcarumContext = useContext(ArcarumContext);
 
   const [count, setCount] = useState<number>(0);
+  const [generatedImageFile, setGeneratedImageFile] = useState<File>();
 
   const backToTop = useCallback(() => {
     if (confirm('最初のページに戻りますか？')) {
@@ -126,8 +138,16 @@ export const ResultPage = withRouter(props => {
   const estimate = useMemo(() => estimateArcarum(progress), [progress]);
 
   useEffect(() => {
-    setTimeout(() => setCount(Math.min(count + 1, estimate.days)), 8);
+    if (count <= estimate.days) {
+      setTimeout(() => setCount(Math.min(count + 1, estimate.days)), 8);
+    }
   }, [count, setCount]);
+
+  useEffect(() => {
+    generateShareImageFile({ evoker: progress.targetEvoker, days: estimate.days }).then((file) =>
+      setGeneratedImageFile(file)
+    );
+  }, [setGeneratedImageFile]);
 
   const tweet = useCallback(() => {
     const text = encodeURIComponent(
@@ -135,6 +155,13 @@ export const ResultPage = withRouter(props => {
     );
     window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
   }, [estimate]);
+
+  const shareWithImage = useCallback(async () => {
+    (navigator as any).share({
+      files: [generatedImageFile],
+      text: `あなたが「${progress.targetEvoker.name.ja}」を取得するまでにかかる日数は……\n約${estimate.days}日\nです！ #グラブル十賢者皮算用ツール\nhttps://sbfl.net/app/granbluefantasy/arcarumcalc/`
+    });
+  }, [generatedImageFile, estimate]);
 
   return (
     <Page>
@@ -151,6 +178,17 @@ export const ResultPage = withRouter(props => {
           ツイートする
         </Button>
       </div>
+      {'share' in navigator && (navigator as any).canShare?.({ files: [new File([''], 'test.png')] }) ? (
+        <div style={buttonContainerStyle}>
+          <Button
+            style={generatedImageFile ? shareButtonStyle : { ...shareButtonStyle, ...disabledButtonStyle }}
+            onClick={generatedImageFile ? shareWithImage : undefined}
+            disabled={!generatedImageFile}
+          >
+            画像でシェア
+          </Button>
+        </div>
+      ) : null}
       <div style={buttonContainerStyle}>
         <Button style={backToTopButtonStyle} onClick={backToTop}>
           はじめから

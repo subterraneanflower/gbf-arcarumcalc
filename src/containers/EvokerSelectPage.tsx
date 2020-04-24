@@ -27,11 +27,11 @@ const evokerButtonStyle: React.CSSProperties = {
   width: '49%'
 };
 
-export const EvokerSelectPage = withRouter(props => {
+export const EvokerSelectPage = withRouter((props) => {
   const arcarumContext = useContext(ArcarumContext);
 
   // 各キャラのボタンを作る
-  const evokerButtons = evokers.map(ev => {
+  const evokerButtons = evokers.map((ev) => {
     // クリック時の挙動
     const onClickCharacter = () => {
       arcarumContext.setTargetEvoker(ev);

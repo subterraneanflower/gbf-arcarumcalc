@@ -41,7 +41,7 @@ const buttonStyle: React.CSSProperties = {
   padding: '0.3em 3em'
 };
 
-export const InventoryPage = withRouter(props => {
+export const InventoryPage = withRouter((props) => {
   const arcarumContext = useContext(ArcarumContext);
 
   const unusedTicketsInputRef = useRef<HTMLInputElement>(null);

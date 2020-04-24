@@ -39,7 +39,7 @@ const issueLinkStyle: React.CSSProperties = {
   color: 'white'
 };
 
-export const TitlePage = withRouter(props => {
+export const TitlePage = withRouter((props) => {
   const gotoCalc = useCallback(() => {
     props.history.push('/evoker');
   }, [props.history]);

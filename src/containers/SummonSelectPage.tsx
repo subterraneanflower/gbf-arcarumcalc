@@ -51,10 +51,10 @@ const summonLevels: SummonLevel[] = [
   { label: 'SSR5凸', level: 7, buttonStyle: ssrSummonButtonStyle }
 ];
 
-export const SummonSelectPage = withRouter(props => {
+export const SummonSelectPage = withRouter((props) => {
   const arcarumContext = useContext(ArcarumContext);
 
-  const summonButtons = summonLevels.map(summon => {
+  const summonButtons = summonLevels.map((summon) => {
     const onClickSummon = () => {
       arcarumContext.setSummonLevel(summon.level);
       props.history.push('/inventory');

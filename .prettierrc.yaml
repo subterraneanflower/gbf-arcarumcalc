@@ -1,2 +1,6 @@
 printWidth: 120
 singleQuote: true
+semi: true
+arrowParens: always
+trailingComma: none
+jsxBracketSameLine: false

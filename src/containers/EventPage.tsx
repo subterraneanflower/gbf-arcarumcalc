@@ -48,7 +48,7 @@ const buttonStyle: React.CSSProperties = {
   padding: '0.3em 3em'
 };
 
-export const EventPage = withRouter(props => {
+export const EventPage = withRouter((props) => {
   const arcarumContext = useContext(ArcarumContext);
 
   const [showsTicketInput, setShowsTicketInput] = useState<boolean>(
